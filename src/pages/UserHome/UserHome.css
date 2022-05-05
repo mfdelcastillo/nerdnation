@@ -1,0 +1,7 @@
+.divTwo {
+    display:grid
+}
+
+.carouselDiv {
+    grid-area: 1/2/2/3;
+}
