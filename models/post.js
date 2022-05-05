@@ -14,8 +14,7 @@ const postSchema = mongoose.Schema({
         type:String,
         required: true,
         sortOrder: Number
-    },
-    timestamps: true
+    }
 })
 
 module.exports = mongoose.model('Post', postSchema)

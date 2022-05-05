@@ -1,7 +1,8 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
-module.exports = {create,login};
+module.exports = {create};
   
 
 async function create(req, res) {
@@ -17,4 +18,13 @@ async function create(req, res) {
       // Probably a dup email
       res.status(400).json({ msg: e.message});
     }
+  }
+
+  function createJWT(user) {
+    return jwt.sign(
+      // data payload
+      { user },
+      process.env.SECRET,
+      { expiresIn: '24h' }
+    );
   }

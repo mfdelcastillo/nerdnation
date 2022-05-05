@@ -4,12 +4,15 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const userController = require('./controllers/userController')
+const userRouter = require('./routes/userRoutes')
+const cors = require('cors')
 
 require('dotenv').config();
 require('./config/database');
 
 const app = express();
-
+app.use(cors());
 app.use(logger('dev'));
 // there's no need to mount express.urlencoded middleware
 // why is that?
@@ -25,11 +28,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(require('./config/checkToken'));
 
 // Put API routes here, before the "catch all" route
-app.use('/api/users', require('./routes/api/users'));
-
-const ensureLoggedIn = require('./config/ensureLoggedIn');
-app.use('/api/items', ensureLoggedIn, require('./routes/api/items'));
-app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'));
+app.use('/api/users', userRouter)
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
