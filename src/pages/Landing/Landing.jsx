@@ -7,7 +7,7 @@ export default function Landing({setUser}){
         
         <div className="divOne">
             <div className="signUpDiv">
-                <p>Lorem ipsum for words I don't wanna type</p>
+                <p>Welcome to Nerd Nation, a place where nerds, fanatics, and all around obsessive lovers of content can connect and gather. </p>
                 <Link to="/signup">Sign Up</Link>
             </div>
             <div className="demoDiv1">
