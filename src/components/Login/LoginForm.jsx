@@ -15,8 +15,8 @@ function handleChange(evt) {
   setError('');
 }
 const navigate = useNavigate();
+
 async function handleSubmit(evt) {
-    // Prevent form from being submitted to the server
     evt.preventDefault();
     try {
       const user = await usersService.login(authentication);

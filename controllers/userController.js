@@ -8,7 +8,6 @@ module.exports = {create, login};
   
 
 async function create(req, res) {
-    
     try {
       const encryptedPassword = await bcrypt.hash(req.body.password, 10)
       // Add the user to the db
@@ -22,7 +21,6 @@ async function create(req, res) {
   }
 
 async function login(req,res){
-
     try{
       const user = await User.findOne({email: req.body.email})
       if(!user){
@@ -35,26 +33,18 @@ async function login(req,res){
       res.status(200).json(token);
     }
     catch(e) {
-      console.log(e)
       res.status(400).json('Username or password is incorrect, haha.')
     }
 }
 
-// async function login(req, res) {
-//   try {
-//     // Find the user by their email address
-//     const user = await User.findOne({email: req.body.email});
-//     if (!user) throw new Error();
-//     // Check if the password matches
-//     const match = await bcrypt.compare(req.body.password, user.password);
-//     if (!match) throw new Error();
-//     res.status(200).json( createJWT(user) );
-//   } catch(e) {
-//     res.status(400).json({ msg: e.message, reason: 'Bad Credentials' });
-//   }
-// }
-
-
+async function get(req,res){
+  try{
+    const user = await User.findOne()
+  }
+  catch(e){
+    res.status(400).json('Failed to retrieve user data')
+  }
+}
 
   function createJWT(user) {
     return jwt.sign(
