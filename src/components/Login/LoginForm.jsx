@@ -2,7 +2,7 @@ import {useState} from 'react'
 import styles from '../component-css/Form.module.css'
 import * as usersService from '../../utilities/users-service'
 
-export default function LoginForm ({setUser}){
+export default function LoginForm (){
     const [authentication, setAuthentication] = useState({
         email: '',
         password: ''
@@ -22,7 +22,6 @@ async function handleSubmit(evt) {
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
       const user = await usersService.login(authentication);
-      setUser(user);
     } catch {
       setError('Log In Failed - Try Again');
     }

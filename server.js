@@ -4,7 +4,6 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-const userController = require('./controllers/userController')
 const userRouter = require('./routes/userRoutes')
 const cors = require('cors')
 

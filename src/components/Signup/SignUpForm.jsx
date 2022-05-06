@@ -3,7 +3,7 @@ import {signUp} from '../../utilities/users-service'
 import styles from '../component-css/Form.module.css'
 import { useNavigate } from "react-router-dom";
 
-export default function SignUpForm ({setUser}) {
+export default function SignUpForm () {
     const [error, setError] = useState('')
     const [formData, setFormData] = useState({
         name: '',
@@ -18,12 +18,8 @@ const navigate = useNavigate()
 const handleChange = (e) => {
         setFormData({...formData, [e.target.name]:e.target.value})
         setError('')
-        console.log('handle change or something')
     };
 
-    const consolelog = ()=>{
-        console.log('Hello')
-    }
 
 const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -31,12 +27,12 @@ const handleSubmit = async (e)=>{
             delete formData.confirm;
             delete formData.error;
             const user = await signUp(formData);
-            setUser(user)
-            // navigate('/userhome')
+            navigate('/home')
             console.log(user)
         }
-        catch {
-            setError('Failed to sign up. Please try again.')
+        catch(error) {
+            setError(error.toString())
+            console.log(error)
         }
     };
 
@@ -55,7 +51,6 @@ const handleSubmit = async (e)=>{
                         <input type ='text' name="confirm" value={formData.confirm} onChange={handleChange} required />
                         <button type="submit" disabled={disable}>SIGN UP</button>
                     </form>
-                    <button onClick={consolelog}>Click</button>
                 </div>
                 <p className="error-message">{error}</p>
             </div>
