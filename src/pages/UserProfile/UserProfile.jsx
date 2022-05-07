@@ -2,8 +2,11 @@ import { useParams } from 'react-router-dom'
 import './UserProfile.css'
 import {useState, useEffect} from 'react'
 import { getProfile, updateProfile, deleteProfile } from '../../utilities/users-service';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function UserProfile(){
+    const navigate = useNavigate();
     const {userid} = useParams();
     const [profile, setProfile] = useState([]);
 
@@ -28,9 +31,11 @@ export default function UserProfile(){
             console.log(error)
           }
         }
+
     function deleteThis(evt){
         try{
             deleteProfile(userid)
+            navigate('/')
         }
         catch(err){
                 console.log(err)

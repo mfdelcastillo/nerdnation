@@ -11,6 +11,7 @@ module.exports = {create, login, get, update, Delete};
 async function Delete(req,res){
   try{
     const deleteProfile = await UserProfile.findOneAndDelete({userid:req.params.userid})
+    const deleteAccount= await User.findByIdAndDelete(req.params.userid)
     if (await UserProfile.findOne({userid:req.params.userid})){
       throw new Error()
     }
