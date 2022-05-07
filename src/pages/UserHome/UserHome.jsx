@@ -8,7 +8,7 @@ export default function UserHome(){
     console.log(user)
     return(
         <div className="divTwo">
-            <Link to="/profile">Click here to set up your profile</Link>
+            <Link to={`/profile/${user._id}`}>Click here to set up your profile</Link>
             <div className="carouselDiv">
                 <Carousel />
             </div>

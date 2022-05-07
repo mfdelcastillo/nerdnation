@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
 
-const {Schema, model}  = mongoose;
-
-const userProfileSchema = new Schema ({
-    userName: String,
+const userProfileSchema = mongoose.Schema({
+    name: String,
     age: String,
     identity: Number,
     location: Number,
@@ -11,8 +9,11 @@ const userProfileSchema = new Schema ({
     lookingFor: String,
     profileText: String,
     hobbies: Number,
+    userid: {
+        type: String,
+        unique:true,
+        required:true
+            }
 })
 
-const userProfile = model('User Profile', userProfileSchema)
-
-module.exports = userProfile;
+module.exports = mongoose.model('UserProfile', userProfileSchema)

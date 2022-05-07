@@ -1,10 +1,11 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const User = require('../models/user')
+const User = require('../models/user');
+const UserProfile = require('../models/userProfile');
 
 
-module.exports = {create, login};
+module.exports = {create, login, get};
   
 
 async function create(req, res) {
@@ -12,7 +13,8 @@ async function create(req, res) {
       const encryptedPassword = await bcrypt.hash(req.body.password, 10)
       // Add the user to the db
       const user = await User.create({...req.body, password:encryptedPassword});
-      // token will be a string
+      const createProfile = await UserProfile.create({userid:user._id})
+      console.log(createProfile)
       const token = createJWT(user);
       res.status(200).json(token);
     } catch (e) {
@@ -39,7 +41,13 @@ async function login(req,res){
 
 async function get(req,res){
   try{
-    const user = await User.findOne()
+    console.log(req.params.userid)
+    const getProfile = await UserProfile.findOne({userid:req.params.userid})
+    console.log(getProfile)
+    if (!getProfile){
+      throw new Error()
+    }
+    res.status(200).json(getProfile)
   }
   catch(e){
     res.status(400).json('Failed to retrieve user data')

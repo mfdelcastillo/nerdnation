@@ -1,3 +1,4 @@
+
 import * as usersAPI from './users-api'
 
 export async function signUp(userData) {
@@ -12,6 +13,13 @@ export async function login(authorization){
 
     localStorage.setItem('token', token);
     return getUser();
+}
+
+export async function getProfile(userid){
+    console.log(userid + ' from users-service')
+    const result = await usersAPI.getProfile(userid)
+    console.log(result)
+    return result
 }
 
 export function getToken(){
