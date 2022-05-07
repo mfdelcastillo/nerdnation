@@ -15,10 +15,19 @@ export async function login(authorization){
     return getUser();
 }
 
+export async function deleteProfile(userid){
+    const deletion = await usersAPI.deleteProfile(userid)
+    return deletion
+}
+
 export async function getProfile(userid){
-    console.log(userid + ' from users-service')
     const result = await usersAPI.getProfile(userid)
-    console.log(result)
+    return result
+}
+
+export async function updateProfile(userid, payload){
+    console.log(payload)
+    const result = await usersAPI.updateProfile(userid, payload)
     return result
 }
 

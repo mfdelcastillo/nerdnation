@@ -5,8 +5,21 @@ const User = require('../models/user');
 const UserProfile = require('../models/userProfile');
 
 
-module.exports = {create, login, get};
+module.exports = {create, login, get, update, Delete};
   
+
+async function Delete(req,res){
+  try{
+    const deleteProfile = await UserProfile.findOneAndDelete({userid:req.params.userid})
+    if (await UserProfile.findOne({userid:req.params.userid})){
+      throw new Error()
+    }
+    res.status(200).json('SUCCESSFUL DELETION')
+  }
+  catch(e){
+    res.status(400).json('FAILED TO DELETE')
+  }
+}
 
 async function create(req, res) {
     try {
@@ -41,9 +54,7 @@ async function login(req,res){
 
 async function get(req,res){
   try{
-    console.log(req.params.userid)
     const getProfile = await UserProfile.findOne({userid:req.params.userid})
-    console.log(getProfile)
     if (!getProfile){
       throw new Error()
     }
@@ -54,6 +65,19 @@ async function get(req,res){
   }
 }
 
+async function update(req,res){
+  try{
+    const user = await UserProfile.findOneAndUpdate({userid:req.params.userid},{...req.body})
+    console.log(user)
+    if (!user){
+      throw new Error()
+    }
+    res.status(200).json('Okay')
+  }
+  catch(e){
+    res.status(400).json({msg: e.message})
+  }
+}
   function createJWT(user) {
     return jwt.sign(
       // data payload
