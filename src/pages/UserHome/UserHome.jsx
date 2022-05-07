@@ -1,10 +1,14 @@
 import Carousel from "../../components/Carousel/Carousel";
+import {useState} from 'react'
 import {Link} from 'react-router-dom'
+import { getUser } from "../../utilities/users-service";
 
 export default function UserHome(){
+    const [user, setUser] = useState(getUser())
+    console.log(user)
     return(
         <div className="divTwo">
-            <Link to={`/home/${user.name}/profile`}>Click here to set up your profile</Link>
+            <Link to="/profile">Click here to set up your profile</Link>
             <div className="carouselDiv">
                 <Carousel />
             </div>

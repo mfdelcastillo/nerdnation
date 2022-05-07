@@ -2,7 +2,7 @@ import './Landing.css';
 import Carousel from '../../components/Carousel/Carousel'
 import {Link} from 'react-router-dom'
 
-export default function Landing({setUser}){
+export default function Landing(){
     return(
         
         <div className="divOne">
